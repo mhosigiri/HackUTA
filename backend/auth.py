@@ -5,11 +5,16 @@ import jwt
 from functools import lru_cache
 from jwt import PyJWKClient
 from dotenv import load_dotenv
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 load_dotenv()
 
 AUTH0_DOMAIN = os.getenv("AUTH0_DOMAIN")
-AUTH0_AUDIENCE = os.getenv("AUTH0_AUDIENCE")
+AUTH0_AUDIENCE = os.getenv("AUTH0_AUDIENCE") or os.getenv("AUTH0_API_AUDIENCE")
 ALGORITHMS = ["RS256"]
 
 
@@ -29,33 +34,21 @@ def verify_token(token: str) -> Optional[Dict]:
         signing_key = jwks_client.get_signing_key_from_jwt(token)
 
         # Decode and verify the token
-        # Skip audience validation if using Management API or not configured
-        if AUTH0_AUDIENCE and not AUTH0_AUDIENCE.endswith("/api/v2/"):
-            # Validate audience if properly configured
-            payload = jwt.decode(
-                token,
-                signing_key.key,
-                algorithms=ALGORITHMS,
-                audience=AUTH0_AUDIENCE,
-                issuer=f"https://{AUTH0_DOMAIN}/"
-            )
-        else:
-            # Skip audience validation for now
-            payload = jwt.decode(
-                token,
-                signing_key.key,
-                algorithms=ALGORITHMS,
-                issuer=f"https://{AUTH0_DOMAIN}/",
-                options={"verify_aud": False}
-            )
+        payload = jwt.decode(
+            token,
+            signing_key.key,
+            algorithms=ALGORITHMS,
+            audience=AUTH0_AUDIENCE,
+            issuer=f"https://{AUTH0_DOMAIN}/"
+        )
 
         return payload
-    except jwt.ExpiredSignatureError:
-        # Token expired
+    except jwt.ExpiredSignatureError as e:
+        logger.error(f"Token verification failed: ExpiredSignatureError - {e}")
         return None
-    except jwt.InvalidTokenError:
-        # Any token validation/claims error (audience/issuer/signature/format)
+    except jwt.InvalidTokenError as e:
+        logger.error(f"Token verification failed: InvalidTokenError - {e}")
         return None
     except Exception as e:
-        # Fallback for unexpected errors
+        logger.error(f"An unexpected error occurred during token verification: {e}", exc_info=True)
         return None

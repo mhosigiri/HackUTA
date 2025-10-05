@@ -13,6 +13,9 @@ from typing import List
 import os
 import shutil
 import uuid
+from datetime import datetime
+from document_ai_service import process_document
+from storage_service import upload_to_gcs
 
 api_router = APIRouter()
 security = HTTPBearer()
@@ -364,3 +367,128 @@ async def upload_documents(
             raise HTTPException(status_code=500, detail=f"Failed to upload {upload.filename}")
 
     return {"message": "Documents uploaded successfully", "documents": saved_documents}
+
+
+@api_router.post("/documents/{document_id}/process")
+async def process_document_endpoint(
+    document_id: int,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_db),
+):
+    """
+    Process a document using Google Document AI to extract key-value pairs and entities.
+    """
+    token = credentials.credentials
+    payload = verify_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    auth0_id = payload.get("sub")
+    user = db.query(User).filter(User.auth0_id == auth0_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # Get the document
+    doc = db.query(Document).filter(
+        Document.id == document_id,
+        Document.user_id == user.id
+    ).first()
+    
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    try:
+        # Update status to processing
+        doc.status = DocumentStatus.PROCESSING
+        db.commit()
+
+        # Read the file content
+        with open(doc.file_path, "rb") as f:
+            file_content = f.read()
+
+        # Determine MIME type
+        mime_type = "application/pdf" if doc.file_type.lower() in ["pdf", "application/pdf"] else "image/jpeg"
+
+        # Process with Document AI
+        extracted_data = process_document(file_content, mime_type)
+
+        # Update document with extracted data
+        doc.extracted_data = extracted_data
+        doc.status = DocumentStatus.PROCESSED
+        doc.processed_date = datetime.utcnow()
+        db.commit()
+        db.refresh(doc)
+
+        # Record extraction activity
+        activity = Activity(
+            user_id=user.id,
+            activity_type=ActivityType.EXTRACTION,
+            description=f"Extracted data from {doc.file_name}",
+            status=ActivityStatus.SUCCESS,
+            document_id=doc.id,
+            document_name=doc.file_name,
+        )
+        db.add(activity)
+        db.commit()
+
+        return {
+            "message": "Document processed successfully",
+            "document_id": doc.id,
+            "extracted_data": extracted_data
+        }
+
+    except Exception as e:
+        # Update status to failed
+        doc.status = DocumentStatus.FAILED
+        db.commit()
+
+        # Record failed extraction activity
+        activity = Activity(
+            user_id=user.id,
+            activity_type=ActivityType.EXTRACTION,
+            description=f"Failed to extract data from {doc.file_name}",
+            status=ActivityStatus.FAILED,
+            document_id=doc.id,
+            document_name=doc.file_name,
+        )
+        db.add(activity)
+        db.commit()
+
+        raise HTTPException(status_code=500, detail=f"Failed to process document: {str(e)}")
+
+
+@api_router.get("/documents/{document_id}/extracted-data")
+async def get_extracted_data(
+    document_id: int,
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_db),
+):
+    """
+    Get the extracted data for a specific document.
+    """
+    token = credentials.credentials
+    payload = verify_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    auth0_id = payload.get("sub")
+    user = db.query(User).filter(User.auth0_id == auth0_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    # Get the document
+    doc = db.query(Document).filter(
+        Document.id == document_id,
+        Document.user_id == user.id
+    ).first()
+    
+    if not doc:
+        raise HTTPException(status_code=404, detail="Document not found")
+
+    return {
+        "document_id": doc.id,
+        "file_name": doc.file_name,
+        "status": doc.status.value if hasattr(doc.status, "value") else doc.status,
+        "extracted_data": doc.extracted_data or {},
+        "processed_date": doc.processed_date.isoformat() if doc.processed_date else None
+    }

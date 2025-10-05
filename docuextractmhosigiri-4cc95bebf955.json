@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "docuextractmhosigiri",
+  "private_key_id": "4cc95bebf955bd9c334cfd2285033961b5ab941d",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCRZGQH6Q2SKzPt\noxn/qBq/Jp6rZkOeCh37Xd6WhEnqJaLMVRVn5NmvUTYw/WExKqh+hefCCuQhfC0K\nFiGLGHIYG9mCaUwTidXYp8BJpXi6RhnDvchHwJbdXKkWtKeBBHSEq4jrmBMb+7t/\n2Nq2Jd9xFrWTP2JJrVSaw4CnLndAORbC8kQsiRpDApfiIRNB9nt4e4J+U1l+A9yE\naJ6NRnapSxEH/Etqi1AXt2o64MRQpCvLfZdxm/Kb79I5MyxkyZkiIKz3a6SiTH3V\nXV5nVfE70lyPEijDgFNwADlp30yDijPaIT3m/E1/hnF6zoKQH4gC64lmMcRyG+EF\n5vg+CpJpAgMBAAECggEAD36DhdpJcXR8M2IogPfLveeM4kGNiYKU1mHBuQhTuN8W\nPdtVYtM0evwByppovgId9GSAdyE3qvUzoY8L4mm9Ave40tk2MSDacsfRyfzB5GwD\nDo/45ONP0JBcOV4QOcNynWQ1vRG2+5+fSDfL0Gcx1uNE1Mfc9B1uK5NpGv1B2ndH\nMrNZ7PG/LaWOulwCBZobJTn0+sZjE/C+hhzTlvrfA2iVkQjpghI7wVTD8oihrwYp\nxeF+4cO7azqqdZmbSoKkOwnxdgTPdIrAijKJ0mGJsOelUk1Nur31gUZ2dSjrE2Oy\ne3xp/f7S8fRQYFaWjScHh50ppDYkRrioCwN5Tc4TLwKBgQDJ+dHVQRCYRSC69Vue\nTzjd+CcAtUBPZ8fq5XFzcO23+QATZObm+U+dedaArfOWKUh/Ya1u76v608BiM8cR\n7cmug0ez845sCwDiN0j56sYQ44ymBLnfQ7w0XWK0tohA0dQPpubyGuI7VLorWwx1\nxCav4w2EZ8B+uNAyZZ6DIi+eZwKBgQC4SAjPoKclW5+Ko5Hv+XZJ/yNdQctRgH7Y\nbSVA+dzK2P52qlFFkViDr0CAsib1N735w7wUkf5wjBZgn2q9K04JT9hQHQFTl6LO\nOH1Ch38LEtrgLPBdY3S4ElEwe5My87EG1uGDk4bIpx61qepl8xqMHdBNKjD2eE3J\nQu+gUfYmrwKBgG4ClDgDaHaHsHwkh/KCVAcS0qugDZcyf8GBl3m5WMGL7m6h1uKX\niLXNVvhfxv1THxnCqiRyhsnn7DGQ4izxx5g2CSgK0NgoZiLQ2f7F0XwBdOo4SMVC\nr5AWDV1AzpX/s/GShtf3rKGEVKKoxPCgFjJXCVXE7SQYpc3Na7khNa6hAoGBAKaz\nmyzfonRb9u3+W+Ue4M+9eqtA+oDm4Vg9G+c0YHQrab3FArIQ8mZlYc9J2Y4Yd8V6\nOCjPjMEZKKENdQxdIUGxNff61RleYct1NHK7icRlsRP78xA4CPz+rO1TzGvaILkU\nJ3rUOKhI7bHeXIkPKmO4EJfNY++CErPO1mBL5IVHAoGAMcKj6ZmJ9W40ATm3Dv+O\nZ677tODMWx49E+KPHZ+5JKCxrlVscy2uakPl5ckjSmp0kZL03/c+4frbIBxppusk\nLdEHmrbKrmS9sapLIvoMGYYjdqp2ThO5HLfbkPAvyx4bejdt+ZiL0WjmYV1MM44+\n3ViE0VQyQX3cx/S8Q+RthCI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "mortgage-app-sa@docuextractmhosigiri.iam.gserviceaccount.com",
+  "client_id": "105798052549663857570",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mortgage-app-sa%40docuextractmhosigiri.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

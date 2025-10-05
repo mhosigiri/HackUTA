@@ -152,6 +152,8 @@ class ActivityListResponse(BaseModel):
 
 # Extraction Result Schemas
 class ExtractionResultBase(BaseModel):
+    model_config = {"protected_namespaces": ()}
+    
     extraction_type: str
     extracted_fields: Dict[str, Any]
     confidence_score: Optional[int] = None

@@ -6,36 +6,20 @@ from routers import api_router
 import os
 from database import init_db
 
-app = FastAPI(
-    title="FastAPI Auth0 Backend",
-    description="FastAPI backend with Auth0 authentication",
-    version="1.0.0"
-)
+app = FastAPI()
 
 # CORS configuration
-allowed_origins_env = os.getenv("CORS_ORIGINS")
-# Accept localhost on any port if not explicitly set
-if allowed_origins_env:
-    allowed_origins = [o.strip() for o in allowed_origins_env.split(",") if o.strip()]
-else:
-    allowed_origins = [f"http://localhost:{port}" for port in ("3000","3001","5173")]  # CRA / Vite defaults
+origins = [
+    "http://localhost:3000"  # Example: your frontend application's origin
+]
 
-if os.getenv("DEV_PERMISSIVE_CORS", "true") == "true":
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origin_regex=".*",
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-else:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=allowed_origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all HTTP methods
+    allow_headers=["*"],  # Allows all headers
+)
 
 security = HTTPBearer()
 
