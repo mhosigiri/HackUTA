@@ -1,0 +1,455 @@
+/* Spider-Verse Theme Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Bebas+Neue&display=swap');
+
+:root {
+  --spidey-red: #DF1F2D;
+  --spidey-dark-red: #B11313;
+  --spidey-blue: #2B37B4;
+  --spidey-light-blue: #447BBE;
+  --spidey-black: #1a1a1a;
+  --spidey-yellow: #FFD700;
+}
+
+/* Halftone dot pattern background */
+.halftone-bg {
+  background-color: var(--spidey-black);
+  background-image: 
+    radial-gradient(circle, rgba(223, 31, 45, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(68, 123, 190, 0.1) 1px, transparent 1px);
+  background-size: 20px 20px, 30px 30px;
+  background-position: 0 0, 10px 10px;
+}
+
+/* Spider-web pattern overlay */
+.web-pattern {
+  position: relative;
+  overflow: hidden;
+}
+
+.web-pattern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.03) 40px, rgba(255, 255, 255, 0.03) 41px),
+    repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(255, 255, 255, 0.03) 40px, rgba(255, 255, 255, 0.03) 41px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Glitch effect animation */
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.glitch-text {
+  animation: glitch 3s infinite;
+}
+
+/* Comic book style border */
+.comic-border {
+  border: 4px solid var(--spidey-black);
+  box-shadow: 
+    0 0 0 6px var(--spidey-red),
+    0 0 0 8px var(--spidey-black),
+    8px 8px 0 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* Comic speech bubble */
+.speech-bubble {
+  position: relative;
+  background: white;
+  border: 4px solid var(--spidey-black);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: 5px 5px 0 var(--spidey-black);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 30px;
+  border: 10px solid transparent;
+  border-top-color: var(--spidey-black);
+  border-right: 0;
+  margin-left: -5px;
+}
+
+/* Spider-Verse gradient backgrounds */
+.spidey-gradient-red {
+  background: linear-gradient(135deg, var(--spidey-red) 0%, var(--spidey-dark-red) 100%);
+}
+
+.spidey-gradient-blue {
+  background: linear-gradient(135deg, var(--spidey-light-blue) 0%, var(--spidey-blue) 100%);
+}
+
+.spidey-gradient-mixed {
+  background: linear-gradient(135deg, var(--spidey-red) 0%, var(--spidey-blue) 100%);
+}
+
+/* Neon glow effect */
+.neon-glow {
+  text-shadow: 
+    0 0 10px var(--spidey-red),
+    0 0 20px var(--spidey-red),
+    0 0 30px var(--spidey-red),
+    0 0 40px var(--spidey-blue);
+}
+
+.neon-border {
+  box-shadow: 
+    0 0 10px var(--spidey-red),
+    0 0 20px var(--spidey-red),
+    inset 0 0 10px rgba(223, 31, 45, 0.5);
+}
+
+/* Spider-Verse card style */
+.spidey-card {
+  background: rgba(255, 255, 255, 0.95);
+  border: 4px solid var(--spidey-black);
+  border-radius: 16px;
+  box-shadow: 
+    8px 8px 0 var(--spidey-red),
+    -2px -2px 0 var(--spidey-blue);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.spidey-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 
+    12px 12px 0 var(--spidey-red),
+    -3px -3px 0 var(--spidey-blue);
+}
+
+/* Spider-Verse button */
+.spidey-button {
+  background: var(--spidey-red);
+  color: white;
+  font-weight: 800;
+  text-transform: uppercase;
+  border: 3px solid var(--spidey-black);
+  border-radius: 8px;
+  padding: 12px 24px;
+  box-shadow: 4px 4px 0 var(--spidey-black);
+  transition: all 0.2s ease;
+  position: relative;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px;
+}
+
+.spidey-button:hover:not(:disabled) {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--spidey-black);
+}
+
+.spidey-button:active:not(:disabled) {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--spidey-black);
+}
+
+.spidey-button:disabled {
+  background: #666;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.spidey-button-blue {
+  background: var(--spidey-blue);
+}
+
+/* Comic book font headings */
+.comic-heading {
+  font-family: 'Bangers', cursive;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--spidey-red);
+  text-shadow: 
+    3px 3px 0 var(--spidey-black),
+    -1px -1px 0 var(--spidey-yellow);
+}
+
+.comic-subheading {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+/* Spider-web decorative element */
+.spider-web-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  opacity: 0.1;
+  pointer-events: none;
+  background-image: 
+    linear-gradient(45deg, transparent 48%, var(--spidey-red) 48%, var(--spidey-red) 52%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, var(--spidey-red) 48%, var(--spidey-red) 52%, transparent 52%);
+  background-size: 30px 30px;
+}
+
+/* Animated Spider-Verse ripple */
+@keyframes spider-ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.spider-ripple {
+  position: relative;
+}
+
+.spider-ripple::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border: 3px solid var(--spidey-red);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: spider-ripple 2s infinite;
+}
+
+/* Comic panel effect */
+.comic-panel {
+  background: white;
+  border: 5px solid var(--spidey-black);
+  box-shadow: 
+    inset 0 0 0 2px white,
+    inset 0 0 0 7px var(--spidey-black),
+    10px 10px 0 rgba(0, 0, 0, 0.3);
+  clip-path: polygon(
+    0% 3%, 3% 0%, 97% 0%, 100% 3%,
+    100% 97%, 97% 100%, 3% 100%, 0% 97%
+  );
+}
+
+/* Status badge Spider-Verse style */
+.spidey-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border: 2px solid var(--spidey-black);
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px;
+  box-shadow: 2px 2px 0 var(--spidey-black);
+}
+
+/* Input Spider-Verse style */
+.spidey-input {
+  border: 3px solid var(--spidey-black);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  background: white;
+}
+
+.spidey-input:focus {
+  outline: none;
+  border-color: var(--spidey-red);
+  box-shadow: 
+    0 0 0 3px rgba(223, 31, 45, 0.2),
+    4px 4px 0 var(--spidey-black);
+  transform: translate(-2px, -2px);
+}
+
+/* Pulse animation for important elements */
+@keyframes spider-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(223, 31, 45, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(223, 31, 45, 0);
+  }
+}
+
+.spider-pulse {
+  animation: spider-pulse 2s infinite;
+}
+
+/* Ben-Day dots pattern */
+.benday-dots {
+  background-image: 
+    radial-gradient(circle, var(--spidey-red) 1px, transparent 1px),
+    radial-gradient(circle, var(--spidey-blue) 1px, transparent 1px);
+  background-size: 8px 8px, 10px 10px;
+  background-position: 0 0, 4px 4px;
+}
+
+/* Diagonal stripes pattern */
+.diagonal-stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--spidey-red),
+    var(--spidey-red) 10px,
+    var(--spidey-dark-red) 10px,
+    var(--spidey-dark-red) 20px
+  );
+}
+
+/* Action text effect */
+.action-text {
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  color: var(--spidey-yellow);
+  text-shadow: 
+    3px 3px 0 var(--spidey-black),
+    -1px -1px 0 var(--spidey-red);
+  transform: rotate(-5deg);
+  display: inline-block;
+}
+
+/* Checkbox Spider-Verse style */
+.spidey-checkbox:checked {
+  background-color: var(--spidey-red);
+  border-color: var(--spidey-black);
+}
+
+/* Gradient text */
+.spidey-text-gradient {
+  background: linear-gradient(135deg, var(--spidey-red), var(--spidey-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Spider logo SVG */
+.spider-icon {
+  filter: drop-shadow(3px 3px 0 var(--spidey-black));
+}
+
+/* Zoom effect on hover */
+.spidey-zoom:hover {
+  animation: zoom-bounce 0.5s ease;
+}
+
+@keyframes zoom-bounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+}
+
+/* Comic explosion effect */
+@keyframes comic-explode {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.comic-explode {
+  animation: comic-explode 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+/* Skewed panel effect */
+.skewed-panel {
+  transform: skewY(-1deg);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Spider sense effect */
+@keyframes spider-sense {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.spider-sense {
+  animation: spider-sense 2s ease-in-out infinite;
+}
+
+/* POW! BAM! Comic effect text */
+.comic-pow {
+  font-family: 'Bangers', cursive;
+  font-size: 3rem;
+  color: var(--spidey-yellow);
+  text-shadow: 
+    4px 4px 0 var(--spidey-black),
+    -2px -2px 0 var(--spidey-red);
+  transform: rotate(-10deg);
+  display: inline-block;
+  animation: zoom-bounce 2s infinite;
+}
+
+/* Smooth appear animation */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slide-up 0.6s ease-out;
+}
+
+/* Spider-Verse loading spinner */
+@keyframes spider-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spider-spinner {
+  border: 4px solid rgba(223, 31, 45, 0.2);
+  border-top: 4px solid var(--spidey-red);
+  border-right: 4px solid var(--spidey-blue);
+  border-radius: 50%;
+  animation: spider-spin 1s linear infinite;
+}

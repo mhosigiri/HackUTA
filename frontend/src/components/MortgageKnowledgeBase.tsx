@@ -136,60 +136,59 @@ const MortgageKnowledgeBase: React.FC = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-green-50 to-teal-50 rounded-2xl shadow-xl p-8 border border-green-200">
+    <div className="spidey-card p-8 web-pattern comic-explode" 
+         style={{background: 'linear-gradient(135deg, #ffffff 0%, #e6f3ff 100%)'}}>
+      <div className="spider-web-corner"></div>
+      
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-8">
         <div className="flex items-center">
-          <svg
-            className="w-10 h-10 text-green-600 mr-3"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-            />
-          </svg>
+          <div className="w-16 h-16 spidey-gradient-blue rounded-lg flex items-center justify-center mr-4 border-4 border-black rotate-3"
+               style={{boxShadow: '4px 4px 0 black'}}>
+            <svg className="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} 
+                    d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+          </div>
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Document & Policy Assistant</h2>
-            <p className="text-sm text-gray-600 mt-1">
-              Ask questions about your uploaded documents & official mortgage policies (Fannie Mae, FHA, USDA, etc.)
+            <h2 className="text-3xl font-bold comic-heading" 
+                style={{color: '#2B37B4', textShadow: '3px 3px 0 black'}}>
+              🕷️ SPIDER-SENSE ASSISTANT
+            </h2>
+            <p className="text-sm font-semibold mt-1 comic-subheading" style={{color: '#B11313'}}>
+              YOUR DOCS • POLICIES • POWERED BY AI SPIDER-TECH
             </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          {/* TTS Toggle */}
-          <div className="flex items-center bg-white px-3 py-2 rounded-lg border border-purple-300 shadow-sm">
+          {/* TTS Toggle - Spider-Verse Style */}
+          <div className="flex items-center bg-white px-4 py-2 rounded-lg border-3 border-black spidey-badge"
+               style={{boxShadow: '3px 3px 0 #DF1F2D'}}>
             <input
               type="checkbox"
               id="tts-toggle"
               checked={ttsEnabled}
               onChange={(e) => setTtsEnabled(e.target.checked)}
-              className="w-4 h-4 text-purple-600 border-gray-300 rounded focus:ring-purple-500"
+              className="w-5 h-5 spidey-checkbox border-2 border-black rounded"
+              style={{accentColor: '#DF1F2D'}}
             />
-            <label htmlFor="tts-toggle" className="ml-2 text-xs text-gray-700 cursor-pointer flex items-center">
-              <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
-              </svg>
-              TTS {playingAudio ? '🔊' : ''}
+            <label htmlFor="tts-toggle" className="ml-2 text-sm font-bold cursor-pointer flex items-center comic-subheading">
+              🔊 VOICE {playingAudio ? '⚡' : ''}
             </label>
           </div>
           
           {stats && (
-            <div className="bg-white px-4 py-2 rounded-lg border border-green-300 shadow-sm">
-              <p className="text-xs text-gray-600">Knowledge Base</p>
-              <p className="text-sm font-bold text-green-600">
-                {stats.policy_chunks || 0} policy + {stats.user_chunks || 0} user docs
+            <div className="bg-yellow-300 px-4 py-2 rounded-lg border-3 border-black spidey-badge">
+              <p className="text-xs font-bold">KNOWLEDGE BASE</p>
+              <p className="text-sm font-bold text-black">
+                {stats.policy_chunks || 0} + {stats.user_chunks || 0} DOCS
               </p>
             </div>
           )}
         </div>
       </div>
 
-      {/* Query Input */}
+      {/* Query Input - Spider-Verse Style */}
       <div className="mb-6">
         <div className="flex gap-4">
           <input
@@ -197,52 +196,41 @@ const MortgageKnowledgeBase: React.FC = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Ask about mortgage policies, guidelines, requirements..."
+            placeholder="ASK ABOUT POLICIES, DOCUMENTS, REQUIREMENTS..."
             disabled={loading}
-            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:bg-gray-100 disabled:cursor-not-allowed"
+            className="flex-1 spidey-input font-semibold disabled:opacity-50"
           />
           <button
             onClick={handleQuery}
             disabled={loading || !query.trim()}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors flex items-center"
+            className="spidey-button flex items-center gap-2"
           >
             {loading ? (
               <>
-                <svg className="animate-spin h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                  ></path>
-                </svg>
-                Searching...
+                <div className="spider-spinner w-5 h-5"></div>
+                ANALYZING...
               </>
             ) : (
               <>
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
-                Search Policies
+                SEARCH
               </>
             )}
           </button>
         </div>
 
-        {/* Suggested Questions */}
+        {/* Suggested Questions - Comic Style */}
         <div className="mt-4">
-          <p className="text-sm text-gray-600 mb-2">Try asking:</p>
-          <div className="flex flex-wrap gap-2">
+          <p className="text-sm font-bold mb-3 comic-subheading" style={{color: '#B11313'}}>⚡ QUICK QUESTIONS:</p>
+          <div className="flex flex-wrap gap-3">
             {suggestedQuestions.map((suggestion, idx) => (
               <button
                 key={idx}
                 onClick={() => setQuery(suggestion)}
-                className="text-sm px-3 py-1 bg-white border border-gray-300 rounded-full hover:border-green-400 hover:text-green-600 transition-colors"
+                className="text-xs font-bold px-4 py-2 bg-white border-3 border-black rounded-lg hover:transform hover:-translate-y-1 transition-all comic-subheading"
+                style={{boxShadow: '3px 3px 0 #447BBE'}}
               >
                 {suggestion}
               </button>
@@ -251,24 +239,21 @@ const MortgageKnowledgeBase: React.FC = () => {
         </div>
       </div>
 
-      {/* Response Display */}
+      {/* Response Display - Speech Bubble Style */}
       {response && (
-        <div className="bg-white rounded-lg p-6 border border-gray-200 shadow-sm">
+        <div className="speech-bubble mt-6">
           <div className="flex items-start">
-            <svg
-              className="w-6 h-6 text-green-600 mr-3 mt-1 flex-shrink-0"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                fillRule="evenodd"
-                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                clipRule="evenodd"
-              />
-            </svg>
+            <div className="w-12 h-12 rounded-full flex items-center justify-center mr-4 border-3 border-black"
+                 style={{background: '#DF1F2D', boxShadow: '3px 3px 0 black'}}>
+              <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+            </div>
             <div className="flex-1">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-semibold text-gray-900">Policy Answer:</h3>
+              <div className="flex items-center justify-between mb-3">
+                <h3 className="text-2xl font-bold comic-heading" style={{color: '#2B37B4', textShadow: '2px 2px 0 rgba(0,0,0,0.1)'}}>
+                  SPIDER-ANSWER:
+                </h3>
                 {ttsEnabled && audioUrl && (
                   <button
                     onClick={() => {
@@ -278,46 +263,48 @@ const MortgageKnowledgeBase: React.FC = () => {
                       audio.onended = () => setPlayingAudio(false);
                     }}
                     disabled={playingAudio}
-                    className="flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200 disabled:bg-gray-100 disabled:text-gray-400 transition-colors text-sm"
+                    className="spidey-button-blue spidey-button text-sm"
                   >
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z" />
-                    </svg>
-                    {playingAudio ? 'Playing...' : 'Play Audio'}
+                    🔊 {playingAudio ? 'PLAYING...' : 'PLAY AUDIO'}
                   </button>
                 )}
               </div>
-              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">{response.answer}</p>
+              <p className="text-black font-medium leading-relaxed text-lg">{response.answer}</p>
 
-              {/* Sources */}
+              {/* Sources - Spider-Verse Style */}
               {response.sources && response.sources.length > 0 && (
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <p className="text-sm font-semibold text-gray-900 mb-2">
-                    📚 Sources ({response.documents_found} relevant sections found):
+                <div className="mt-6 pt-4 border-t-4 border-black">
+                  <p className="text-lg font-bold mb-4 comic-heading" style={{color: '#DF1F2D', textShadow: '2px 2px 0 rgba(0,0,0,0.1)'}}>
+                    🕸️ SOURCES ({response.documents_found} WEB-STRANDS FOUND):
                   </p>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     {response.sources.map((source, idx) => (
-                      <div key={idx} className={`p-3 rounded border-l-4 ${
-                        source.type === 'user_document' 
-                          ? 'bg-blue-50 border-blue-400' 
-                          : 'bg-green-50 border-green-400'
-                      }`}>
+                      <div key={idx} 
+                           className="p-4 rounded-lg border-3 border-black font-semibold"
+                           style={{
+                             background: source.type === 'user_document' 
+                               ? 'linear-gradient(135deg, #EBF5FF 0%, #D1E9FF 100%)' 
+                               : 'linear-gradient(135deg, #FEF2F2 0%, #FFE4E6 100%)',
+                             boxShadow: source.type === 'user_document'
+                               ? '4px 4px 0 #447BBE'
+                               : '4px 4px 0 #DF1F2D'
+                           }}>
                         {source.type === 'user_document' ? (
                           <>
-                            <p className="text-sm font-medium text-gray-900">
+                            <p className="text-sm font-bold flex items-center comic-subheading" style={{color: '#2B37B4'}}>
                               📄 {source.filename}
                             </p>
-                            <p className="text-xs text-gray-600">
-                              Your uploaded document • Chunk {source.chunk}
+                            <p className="text-xs font-semibold text-gray-700 mt-1">
+                              YOUR UPLOAD • CHUNK {source.chunk}
                             </p>
                           </>
                         ) : (
                           <>
-                            <p className="text-sm font-medium text-gray-900">
+                            <p className="text-sm font-bold flex items-center comic-subheading" style={{color: '#B11313'}}>
                               📚 {source.pdf_name}
                             </p>
-                            <p className="text-xs text-gray-600">
-                              Page {source.page} • {source.path}
+                            <p className="text-xs font-semibold text-gray-700 mt-1">
+                              POLICY DOC • PAGE {source.page}
                             </p>
                           </>
                         )}
@@ -347,26 +334,25 @@ const MortgageKnowledgeBase: React.FC = () => {
         </div>
       )}
 
-      {/* Info Box */}
-      <div className="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+      {/* Info Box - Comic Panel Style */}
+      <div className="mt-8 bg-yellow-100 border-4 border-black rounded-lg p-5" 
+           style={{boxShadow: '6px 6px 0 #DF1F2D'}}>
         <div className="flex items-start">
-          <svg className="w-5 h-5 text-blue-600 mr-2 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-            <path
-              fillRule="evenodd"
-              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <div className="text-sm text-blue-800">
-            <p className="font-semibold mb-1">How This Works</p>
-            <p className="mb-2">
-              <strong>📄 Single-page documents</strong> (invoices, IDs): Key-value extraction only
+          <div className="w-10 h-10 bg-black rounded-full flex items-center justify-center mr-3">
+            <svg className="w-6 h-6 text-yellow-300" fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+            </svg>
+          </div>
+          <div className="text-sm text-black">
+            <p className="font-bold mb-2 comic-subheading text-base" style={{color: '#B11313'}}>⚡ SPIDER-POWERS:</p>
+            <p className="mb-2 font-semibold">
+              <span className="comic-subheading" style={{color: '#2B37B4'}}>📄 1-PAGE DOCS</span> (invoices, IDs) → Key-value extraction
             </p>
-            <p className="mb-2">
-              <strong>📚 Multi-page documents</strong> (loan agreements, policies): Added to RAG system for intelligent querying with Gemini 2.5 Pro
+            <p className="mb-2 font-semibold">
+              <span className="comic-subheading" style={{color: '#DF1F2D'}}>📚 MULTI-PAGE DOCS</span> (agreements) → RAG + Gemini AI
             </p>
-            <p>
-              Ask questions about your uploaded documents OR query official mortgage policy documents (Fannie Mae, FHA, USDA, Freddie Mac, etc.)
+            <p className="font-semibold">
+              🕷️ Query your uploads OR official policies (Fannie Mae, FHA, USDA)
             </p>
           </div>
         </div>

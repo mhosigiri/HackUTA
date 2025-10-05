@@ -7,39 +7,44 @@ const Header: React.FC = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
+    <header className="spidey-gradient-red border-b-4 border-black sticky top-0 z-50 shadow-2xl">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        <div className="flex justify-between items-center h-20">
+          {/* Spider Logo */}
+          <div className="flex items-center space-x-3">
+            <div className="w-14 h-14 bg-black rounded-full flex items-center justify-center border-4 border-white shadow-lg relative spider-icon">
+              <svg className="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                <path d="M12 4L8 8v8l4 4 4-4V8l-4-4z" opacity="0.5"/>
               </svg>
+              <div className="absolute inset-0 rounded-full border-2 border-white opacity-30 animate-ping"></div>
             </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              DocuExtract
-            </span>
+            <div>
+              <h1 className="text-2xl font-bold text-white comic-heading" style={{textShadow: '3px 3px 0 black, -1px -1px 0 #FFD700'}}>
+                DocuSpider
+              </h1>
+              <p className="text-xs text-white opacity-90 comic-subheading">Into the Mortgage-Verse</p>
+            </div>
           </div>
 
           {/* Navigation */}
-          <nav className="hidden md:flex space-x-1">
+          <nav className="hidden md:flex space-x-2">
             <Link
               to="/dashboard"
-              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+              className={`px-6 py-2 rounded-lg font-bold transition-all border-3 comic-subheading ${
                 isActive('/dashboard')
-                  ? 'bg-blue-50 text-blue-600'
-                  : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                  ? 'bg-white text-red-600 border-4 border-black shadow-lg transform scale-105'
+                  : 'bg-black bg-opacity-20 text-white border-2 border-white hover:bg-white hover:text-red-600 hover:border-black'
               }`}
             >
-              Dashboard
+              DASHBOARD
             </Link>
           </nav>
 
-          {/* App Info */}
-          <div className="flex items-center space-x-4">
-            <div className="text-sm text-gray-600">
-              Document Extraction Tool
+          {/* HackUTA Badge */}
+          <div className="flex items-center space-x-3">
+            <div className="spidey-badge bg-yellow-400 text-black spider-pulse">
+              🕷️ HackUTA 2025
             </div>
           </div>
         </div>
