@@ -1,6 +1,5 @@
-google-genai
+google.generativeai
 python-dotenv
 chromadb
-requests
-langchain
 PyPDF2
+sentence_transformers
