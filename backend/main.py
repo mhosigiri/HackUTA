@@ -4,6 +4,7 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from auth import verify_token
 from routers import api_router
 import os
+from database import init_db
 
 app = FastAPI(
     title="FastAPI Auth0 Backend",
@@ -37,6 +38,15 @@ else:
     )
 
 security = HTTPBearer()
+
+@app.on_event("startup")
+def on_startup():
+    # Ensure database tables exist on startup (best-effort)
+    try:
+        init_db()
+    except Exception as e:
+        # Avoid crashing app if DB is not available in local dev
+        print(f"[startup] Skipping DB init due to error: {e}")
 
 @app.get("/")
 async def root():

@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
+from fastapi import UploadFile, File
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from auth import verify_token
 from sqlalchemy.orm import Session
@@ -7,6 +8,11 @@ from models import User
 from models import UserProfile, Activity, Document
 from models import EmploymentStatus, MaritalStatus, ActivityType, ActivityStatus
 from schemas import UserProfileUpdate
+from models import DocumentStatus
+from typing import List
+import os
+import shutil
+import uuid
 
 api_router = APIRouter()
 security = HTTPBearer()
@@ -257,3 +263,104 @@ async def list_documents(
         for d in docs
     ]
     return result
+
+
+@api_router.post("/documents/upload")
+async def upload_documents(
+    files: List[UploadFile] = File(...),
+    credentials: HTTPAuthorizationCredentials = Depends(security),
+    db: Session = Depends(get_db),
+):
+    """
+    Upload one or more documents for the authenticated user.
+    Saves files to local storage and records metadata in the database.
+    """
+    token = credentials.credentials
+    payload = verify_token(token)
+    if not payload:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    auth0_id = payload.get("sub")
+    if not auth0_id:
+        raise HTTPException(status_code=400, detail="Missing sub in token")
+
+    email = payload.get("email")
+
+    # Ensure user exists
+    user = db.query(User).filter(User.auth0_id == auth0_id).first()
+    if not user:
+        if not email:
+            raise HTTPException(status_code=400, detail="Email required to create user")
+        user = User(auth0_id=auth0_id, email=email)
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    # Determine upload directory
+    base_upload_dir = os.getenv("UPLOAD_DIR", os.path.join(os.path.dirname(__file__), "uploads"))
+    user_upload_dir = os.path.join(base_upload_dir, str(user.id))
+    os.makedirs(user_upload_dir, exist_ok=True)
+
+    saved_documents = []
+    for upload in files:
+        try:
+            original_name = upload.filename or "unnamed"
+            file_ext = os.path.splitext(original_name)[1]
+            unique_name = f"{uuid.uuid4().hex}{file_ext}"
+            target_path = os.path.join(user_upload_dir, unique_name)
+
+            # Persist file to disk
+            upload.file.seek(0)
+            with open(target_path, "wb") as out_file:
+                shutil.copyfileobj(upload.file, out_file)
+
+            file_size = os.path.getsize(target_path)
+            file_type = (upload.content_type or file_ext.lstrip(".") or "unknown")
+
+            # Create Document record
+            doc = Document(
+                user_id=user.id,
+                file_name=original_name,
+                file_path=target_path,
+                file_size=file_size,
+                file_type=file_type,
+                status=DocumentStatus.UPLOADED,
+            )
+            db.add(doc)
+            db.commit()
+            db.refresh(doc)
+
+            # Record activity
+            activity = Activity(
+                user_id=user.id,
+                activity_type=ActivityType.UPLOAD,
+                description=f"Uploaded {original_name}",
+                status=ActivityStatus.SUCCESS,
+                document_id=doc.id,
+                document_name=original_name,
+            )
+            db.add(activity)
+            db.commit()
+
+            saved_documents.append({
+                "id": doc.id,
+                "file_name": doc.file_name,
+                "file_size": doc.file_size,
+                "status": (doc.status.value if hasattr(doc.status, "value") else doc.status),
+                "upload_date": doc.upload_date.isoformat() if getattr(doc, "upload_date", None) else None,
+                "message": "Uploaded successfully"
+            })
+        except Exception as e:
+            # On failure, record a failed activity
+            activity = Activity(
+                user_id=user.id,
+                activity_type=ActivityType.UPLOAD,
+                description=f"Failed to upload {upload.filename}",
+                status=ActivityStatus.FAILED,
+                document_name=(upload.filename or "unnamed"),
+            )
+            db.add(activity)
+            db.commit()
+            raise HTTPException(status_code=500, detail=f"Failed to upload {upload.filename}")
+
+    return {"message": "Documents uploaded successfully", "documents": saved_documents}
