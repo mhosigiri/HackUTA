@@ -1,0 +1,24 @@
+INVOICE
+
+Invoice Number: INV-2024-001
+Date: January 15, 2024
+
+Bill To:
+Company Name: Acme Corporation
+Contact: John Smith
+Email: john.smith@acme.com
+Phone: 555-123-4567
+Address: 123 Business St, Suite 100, New York, NY 10001
+
+Items:
+Description: Professional Services - January 2024
+Quantity: 40 hours
+Rate: $150.00/hour
+Amount: $6,000.00
+
+Subtotal: $6,000.00
+Tax (8%): $480.00
+Total Due: $6,480.00
+
+Payment Terms: Net 30
+Due Date: February 15, 2024

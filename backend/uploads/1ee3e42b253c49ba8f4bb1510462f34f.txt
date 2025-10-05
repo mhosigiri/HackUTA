@@ -1,0 +1,9 @@
+Name: John Doe
+Email: john.doe@example.com
+Phone: 555-123-4567
+Amount: echo -e "Name: John Doe
+Email: john.doe@example.com
+Phone: 555-123-4567
+Amount: $1,250.00
+Address: 123 Main St" > /tmp/sample_doc.txt && curl -X POST http://localhost:8000/api/documents/upload -F "files=@/tmp/sample_doc.txt" -s | python3 -c "import sys, json; data=json.load(sys.stdin); print(data['documents'][0]['id'])",250.00
+Address: 123 Main St

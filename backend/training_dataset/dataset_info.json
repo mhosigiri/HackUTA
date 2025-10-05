@@ -1,0 +1,706 @@
+{
+  "total_images": 8181,
+  "sample_size": 100,
+  "images": [
+    {
+      "file_name": "invoice_0000.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0359.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0001.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0417.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0002.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0371.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0003.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0365.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0004.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0403.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0005.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0173.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0006.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0167.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0007.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0198.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0008.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0007.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0009.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0013.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0010.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0239.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0011.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0205.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0012.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0211.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0013.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0210.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0014.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0204.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0015.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0238.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0016.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0012.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0017.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0006.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0018.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0199.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0019.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0166.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0020.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0172.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0021.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0364.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0022.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0402.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0023.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0416.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0024.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0370.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0025.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0358.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0026.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0428.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0027.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0400.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0028.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0366.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0029.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0372.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0030.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0414.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0031.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0399.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0032.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0158.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0033.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0164.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0034.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0170.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0035.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0038.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0036.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0010.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0037.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0004.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0038.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0212.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0039.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0206.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0040.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0207.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0041.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0213.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0042.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0005.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0043.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0011.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0044.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0039.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0045.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0171.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0046.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0165.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0047.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0159.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0048.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0398.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0049.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0373.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0050.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0415.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0051.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0401.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0052.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0367.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0053.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0429.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0054.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0363.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0055.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0405.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0056.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0411.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0057.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0377.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0058.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0439.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0059.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0388.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0060.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0161.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0061.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0175.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0062.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0149.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0063.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0015.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0064.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0001.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0065.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0029.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0066.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0217.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0067.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0203.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0068.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0202.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0069.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0216.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0070.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0028.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0071.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0014.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0072.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0148.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0073.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0174.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0074.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0160.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0075.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0389.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0076.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0438.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0077.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0410.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0078.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0376.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0079.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0362.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0080.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0404.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0081.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0374.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0082.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0412.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0083.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0406.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0084.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0360.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0085.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0348.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0086.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0176.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0087.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0162.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0088.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0189.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0089.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0002.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0090.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0016.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0091.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0200.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0092.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0214.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0093.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0228.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0094.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0229.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0095.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0215.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0096.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0201.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0097.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0017.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0098.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0003.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    },
+    {
+      "file_name": "invoice_0099.jpg",
+      "original_path": "/Users/arniskc/.cache/kagglehub/datasets/osamahosamabdellatif/high-quality-invoice-images-for-ocr/versions/3/batch_1/batch_1/batch1_1/batch1-0188.jpg",
+      "width": 1654,
+      "height": 2339,
+      "format": "JPEG"
+    }
+  ]
+}
