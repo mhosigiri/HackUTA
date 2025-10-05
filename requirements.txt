@@ -1,5 +1,4 @@
-google.generativeai
+flask
 python-dotenv
-chromadb
-PyPDF2
-sentence_transformers
+openai
+elevenlabs
