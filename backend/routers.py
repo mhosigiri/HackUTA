@@ -5,12 +5,21 @@ import shutil
 import uuid
 from datetime import datetime
 from document_ai_service import process_document
+from rag_service import get_rag_service
 import json
 
 api_router = APIRouter()
 
 # Simple in-memory storage for documents (for demo purposes)
 documents_store = {}
+
+# Initialize RAG service
+try:
+    rag_service = get_rag_service()
+    print("[Router] RAG service initialized")
+except Exception as e:
+    print(f"[Router] Warning: RAG service initialization failed: {e}")
+    rag_service = None
 
 @api_router.get("/documents")
 async def list_documents():
@@ -89,9 +98,13 @@ async def upload_documents(files: List[UploadFile] = File(...)):
 
 
 @api_router.post("/documents/{document_id}/process")
-async def process_document_endpoint(document_id: str):
+async def process_document_endpoint(document_id: str, use_rag: bool = True):
     """
-    Process a document using Google Document AI to extract key-value pairs and entities.
+    Process a document using Document AI and optionally enhance with RAG.
+    
+    Args:
+        document_id: Document ID to process
+        use_rag: Whether to use RAG for enhanced extraction (default: True)
     """
     # Get the document
     doc = documents_store.get(document_id)
@@ -107,12 +120,39 @@ async def process_document_endpoint(document_id: str):
         with open(doc["file_path"], "rb") as f:
             file_content = f.read()
 
-        # Determine MIME type
-        mime_type = "application/pdf" if doc["file_type"].lower() in ["pdf", "application/pdf"] else "image/jpeg"
+        # Determine MIME type based on stored file_type
+        ft_lower = doc["file_type"].lower()
+        if ft_lower in ["pdf", "application/pdf"]:
+            mime_type = "application/pdf"
+        elif ft_lower.startswith("image/"):
+            mime_type = ft_lower  # e.g., image/png, image/jpeg
+        else:
+            mime_type = "application/octet-stream"
 
-        # Process with Document AI
+        # Process with Document AI (or fallback)
         extracted_data = process_document(file_content, mime_type)
 
+        # Enhance with RAG if enabled and available
+        if use_rag and rag_service and extracted_data.get("text"):
+            print(f"[Router] Enhancing extraction with RAG for document {document_id}")
+            
+            # Add document to RAG system
+            rag_service.add_document(
+                document_id=document_id,
+                text=extracted_data["text"],
+                metadata={
+                    "file_name": doc["file_name"],
+                    "upload_date": doc["upload_date"]
+                }
+            )
+            
+            # Use RAG to extract additional key-value pairs
+            rag_extraction = rag_service.extract_key_value_pairs_with_rag(extracted_data["text"])
+            
+            # Merge RAG results with Document AI results
+            extracted_data["rag_enhanced"] = True
+            extracted_data["rag_extraction"] = rag_extraction
+        
         # Update document with extracted data
         doc["extracted_data"] = extracted_data
         doc["status"] = "processed"
@@ -121,7 +161,8 @@ async def process_document_endpoint(document_id: str):
         return {
             "message": "Document processed successfully",
             "document_id": document_id,
-            "extracted_data": extracted_data
+            "extracted_data": extracted_data,
+            "rag_enhanced": use_rag and rag_service is not None
         }
 
     except Exception as e:
@@ -191,3 +232,49 @@ async def delete_document(document_id: str):
         return {"message": "Document deleted successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to delete document: {str(e)}")
+
+
+@api_router.post("/rag/query")
+async def rag_query_endpoint(request: dict):
+    """
+    Query documents using RAG (Retrieval-Augmented Generation)
+    
+    Request body:
+        {
+            "query": "Your question here",
+            "n_results": 3  (optional)
+        }
+        
+    Returns:
+        Answer generated from relevant document context
+    """
+    if not rag_service:
+        raise HTTPException(status_code=503, detail="RAG service not available")
+    
+    query = request.get("query")
+    if not query:
+        raise HTTPException(status_code=400, detail="Query is required")
+    
+    n_results = request.get("n_results", 3)
+    
+    try:
+        result = rag_service.rag_query(query, n_results)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"RAG query failed: {str(e)}")
+
+
+@api_router.get("/rag/stats")
+async def rag_stats():
+    """Get RAG system statistics"""
+    if not rag_service:
+        return {"available": False, "message": "RAG service not initialized"}
+    
+    try:
+        stats = rag_service.get_collection_stats()
+        return {
+            "available": True,
+            "stats": stats
+        }
+    except Exception as e:
+        return {"available": False, "error": str(e)}

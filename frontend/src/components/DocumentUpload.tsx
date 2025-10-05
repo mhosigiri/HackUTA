@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { API_CONFIG, UPLOAD_CONFIG, STATUS_MESSAGES } from '../config/constants';
 
 interface DocumentUploadProps {
   onUploadComplete?: () => void;
@@ -26,16 +27,16 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ onUploadComplete }) => 
     try {
       setUploading(true);
       setError(null);
-      setUploadProgress(`Uploading ${files.length} file(s)...`);
+      setUploadProgress(STATUS_MESSAGES.UPLOAD.IN_PROGRESS(files.length));
 
-      const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
       const formData = new FormData();
 
       Array.from(files).forEach((file) => {
         formData.append('files', file);
       });
 
-      const response = await fetch(`${apiBaseUrl}/api/documents/upload`, {
+      const uploadUrl = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.UPLOAD}`;
+      const response = await fetch(uploadUrl, {
         method: 'POST',
         body: formData,
       });
@@ -45,33 +46,47 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ onUploadComplete }) => 
       }
 
       const result = await response.json();
-      setUploadProgress(`Successfully uploaded ${files.length} file(s)!`);
+      setUploadProgress(STATUS_MESSAGES.UPLOAD.SUCCESS(files.length));
 
-      // Process each document with Document AI
+      // Helper: wait for backend to finish processing a document
+      const waitForProcessing = async (id: string) => {
+        const detailUrl = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.DETAIL(id)}`;
+        const maxAttempts = 60; // ~30s (500ms interval)
+        for (let i = 0; i < maxAttempts; i++) {
+          try {
+            const res = await fetch(detailUrl);
+            if (res.ok) {
+              const data = await res.json();
+              if (data.status === 'processed' || data.status === 'failed') return data.status;
+            }
+          } catch {}
+          await new Promise((r) => setTimeout(r, 500));
+        }
+        return 'timeout';
+      };
+
+      // Process each document with Document AI + RAG and wait until done
       if (result.documents && result.documents.length > 0) {
         for (const doc of result.documents) {
           try {
-            setUploadProgress(`Processing ${doc.file_name}...`);
-            await fetch(`${apiBaseUrl}/api/documents/${doc.id}/process`, {
-              method: 'POST',
-            });
+            setUploadProgress(STATUS_MESSAGES.UPLOAD.PROCESSING(doc.file_name));
+            const processUrl = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PROCESS(doc.id)}?use_rag=${UPLOAD_CONFIG.USE_RAG_PROCESSING}`;
+            await fetch(processUrl, { method: 'POST' });
+            setUploadProgress(STATUS_MESSAGES.UPLOAD.WAITING(doc.file_name));
+            await waitForProcessing(doc.id);
           } catch (err) {
             console.error(`Failed to process ${doc.file_name}`, err);
           }
         }
       }
 
-      setUploadProgress('All files processed successfully!');
-      setTimeout(() => {
-        setUploadProgress('');
-        setUploading(false);
-        if (onUploadComplete) {
-          onUploadComplete();
-        }
-      }, 2000);
+      setUploadProgress(STATUS_MESSAGES.UPLOAD.COMPLETE);
+      setUploadProgress('');
+      setUploading(false);
+      onUploadComplete?.();
     } catch (err) {
       console.error('Upload error:', err);
-      setError('Failed to upload documents. Please try again.');
+      setError(STATUS_MESSAGES.UPLOAD.ERROR);
       setUploading(false);
       setUploadProgress('');
     }
@@ -138,14 +153,16 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ onUploadComplete }) => 
                   type="file"
                   className="sr-only"
                   multiple
-                  accept=".pdf,.jpg,.jpeg,.png"
+                  accept={UPLOAD_CONFIG.ACCEPTED_FILE_TYPES}
                   onChange={handleFileInput}
                   disabled={uploading}
                 />
               </label>
               <span className="text-gray-600"> or drag and drop</span>
             </div>
-            <p className="text-xs text-gray-500 mt-2">PDF, JPG, PNG up to 10MB</p>
+            <p className="text-xs text-gray-500 mt-2">
+              {UPLOAD_CONFIG.ACCEPTED_FILE_EXTENSIONS.map(ext => ext.toUpperCase()).join(', ')} up to {UPLOAD_CONFIG.MAX_FILE_SIZE_MB}MB
+            </p>
           </>
         )}
       </div>

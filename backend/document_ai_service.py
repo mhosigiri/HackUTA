@@ -7,6 +7,20 @@ from typing import Optional, Dict, List
 from google.cloud import documentai_v1 as documentai
 from google.api_core.client_options import ClientOptions
 from dotenv import load_dotenv
+import io
+from typing import Tuple
+
+try:
+    import pdfplumber  # Lightweight PDF text extraction
+except ImportError:
+    pdfplumber = None  # Handled at runtime
+
+try:
+    from PIL import Image
+    import pytesseract
+except ImportError:
+    Image = None  # type: ignore
+    pytesseract = None  # type: ignore
 
 load_dotenv()
 
@@ -253,13 +267,47 @@ def simple_text_extraction(file_content: bytes, mime_type: str) -> Dict:
         Dictionary with extracted text and basic key-value pairs
     """
     import re
-    
+
+    def _extract_pdf(pdf_bytes: bytes) -> str:
+        """Extract text from PDF bytes using pdfplumber if available."""
+        if not pdfplumber:
+            print("[FallbackExtraction] pdfplumber not installed, using PyPDF2 as fallback")
+            try:
+                import PyPDF2
+                reader = PyPDF2.PdfReader(io.BytesIO(pdf_bytes))
+                return "\n".join(page.extract_text() or "" for page in reader.pages)
+            except Exception as e:
+                print(f"[FallbackExtraction] PyPDF2 failed: {e}")
+                return ""
+        try:
+            with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+                return "\n".join(page.extract_text() or "" for page in pdf.pages)
+        except Exception as e:
+            print(f"[FallbackExtraction] pdfplumber failed: {e}")
+            return ""
+
+    def _extract_image(img_bytes: bytes) -> str:
+        """OCR image bytes using pytesseract if available."""
+        if not (pytesseract and Image):
+            print("[FallbackExtraction] pytesseract or PIL not installed, cannot OCR image")
+            return ""
+        try:
+            image = Image.open(io.BytesIO(img_bytes))
+            return pytesseract.image_to_string(image)
+        except Exception as e:
+            print(f"[FallbackExtraction] OCR failed: {e}")
+            return ""
+
     try:
-        # For text files, just decode
+        mime_type = mime_type.lower()
         if mime_type in ['text/plain', 'text/txt']:
             text = file_content.decode('utf-8', errors='ignore')
+        elif mime_type in ['application/pdf', 'pdf']:
+            text = _extract_pdf(file_content)
+        elif mime_type.startswith('image/'):
+            text = _extract_image(file_content)
         else:
-            # For other types, try to extract as text
+            # Attempt to decode as utf-8
             text = file_content.decode('utf-8', errors='ignore')
         
         # Extract simple key-value pairs (looking for patterns like "Key: Value")
@@ -314,7 +362,7 @@ def simple_text_extraction(file_content: bytes, mime_type: str) -> Dict:
             "tables": [],
             "pages": 1,
             "confidence": 0.75,
-            "extraction_method": "simple_regex"
+            "extraction_method": "ocr_regex_fallback"
         }
         
     except Exception as e:

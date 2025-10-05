@@ -1,0 +1,36 @@
+MORTGAGE LOAN APPLICATION
+
+Borrower Information:
+Full Name: Robert Anderson
+Social Security Number: 456-78-9012
+Date of Birth: 03/25/1982
+Email: robert.anderson@email.com
+Phone: 555-444-3333
+Current Address: 789 Pine Street, Dallas, TX 75201
+
+Property Information:
+Property Address: 321 Oak Boulevard, Dallas, TX 75202
+Property Type: Single Family Residence
+Purchase Price: $525,000.00
+Down Payment Amount: $105,000.00
+Loan Amount Requested: $420,000.00
+Loan Term: 30 years
+Interest Rate: 6.5%
+
+Employment Information:
+Employer Name: DataTech Solutions
+Position: Senior Data Analyst
+Annual Salary: $165,000.00
+Years with Employer: 7 years
+Employer Phone: 555-777-8888
+
+Financial Information:
+Monthly Gross Income: $13,750.00
+Other Monthly Income: $2,500.00
+Total Assets: $250,000.00
+Total Liabilities: $45,000.00
+
+Declarations:
+First Time Home Buyer: No
+Veteran Status: No
+Number of Dependents: 2

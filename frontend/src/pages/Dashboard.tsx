@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import DocumentUpload from '../components/DocumentUpload';
 import ExtractedDataView from '../components/ExtractedDataView';
+import ChatBot from '../components/ChatBot';
+import { API_CONFIG, DOCUMENT_STATUS } from '../config/constants';
 
 interface Document {
   id: string;
@@ -19,8 +21,8 @@ const Dashboard: React.FC = () => {
   const fetchDocuments = async () => {
     try {
       setLoading(true);
-      const apiBaseUrl = process.env.REACT_APP_API_BASE_URL || 'http://localhost:8000';
-      const response = await fetch(`${apiBaseUrl}/api/documents`);
+      const documentsUrl = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.DOCUMENTS}`;
+      const response = await fetch(documentsUrl);
       const data = await response.json();
       setDocuments(data.documents || []);
     } catch (error) {
@@ -119,6 +121,11 @@ const Dashboard: React.FC = () => {
           <DocumentUpload onUploadComplete={handleUploadComplete} />
         </div>
 
+        {/* AI Chat Assistant Section */}
+        <div className="mb-12">
+          <ChatBot />
+        </div>
+
         {/* Uploaded Documents Section */}
         {documents.length > 0 && (
           <div className="bg-white rounded-2xl shadow-xl p-8 mb-12 border border-gray-100">
@@ -146,9 +153,9 @@ const Dashboard: React.FC = () => {
                       </div>
                       <span
                         className={`ml-2 px-2 py-1 text-xs rounded-full ${
-                          doc.status === 'processed'
+                          doc.status === DOCUMENT_STATUS.PROCESSED
                             ? 'bg-green-100 text-green-800'
-                            : doc.status === 'processing'
+                            : doc.status === DOCUMENT_STATUS.PROCESSING
                             ? 'bg-yellow-100 text-yellow-800'
                             : 'bg-gray-100 text-gray-800'
                         }`}

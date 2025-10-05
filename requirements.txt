@@ -4,3 +4,6 @@ chromadb
 requests
 langchain
 PyPDF2
+pdfplumber
+pytesseract
+pillow
