@@ -1,9 +1,7 @@
 import os
 import PyPDF2
-from langchain.text_splitter import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import chromadb
-from chromadb.utils import embedding_functions
 import google.generativeai as genai
 from dotenv import load_dotenv
 
@@ -15,21 +13,22 @@ class EmbeddingFunction:
     def name(self):
         return "all-MiniLM-L6-v2"
     
-    def __call__(self, input):
-        """
-        Accept a list of inputs and return a list of embeddings
-        """
-        embeddings = []
-        for text in input:
-            try:
-                response = self.model.encode(
-                    text
-                )
-                embeddings.append(response.tolist())
-            except Exception as e:
-                print(f"Error embedding text: {e}")
-                embeddings.append([0.0] * 768)  # Fallback embedding
-        return embeddings
+    def embed_documents(self, input_text):
+        try:
+            return [self.model.encode(text).tolist() for text in input_text]
+        except Exception as e:
+            print(f"[Embedding Error] {e}")
+            return [[0.0] * 384 for _ in input_text]
+    
+    def embed_query(self, input_text):
+        try:
+            if isinstance(input, str):
+                return self.model.encode([input])[0].tolist()
+            else:
+                return [self.model.encode(q).tolist() for q in input_text]
+        except Exception as e:
+            print(f"[Query Embedding Error] {e}")
+            return [0.0] * 384
 
 
 # query 
@@ -68,7 +67,6 @@ def load_documents(path):
         if filename.endswith(".pdf"):
             pdf_path = os.path.join(path, filename)
             reader = PyPDF2.PdfReader(pdf_path)
-            print(reader.pages)
             for i, page in enumerate(reader.pages):
                 text = page.extract_text()
                 if text:
@@ -104,12 +102,11 @@ if __name__ == "__main__":
     # Create embedding function
     embedding_function = EmbeddingFunction()
 
-    # Initialize ChromaDB
-    chroma_client = chromadb.PersistentClient(path="chroma_persistent_storage")
+    # Initialize ChromaDB client
+    chroma_client = chromadb.PersistentClient(path="./chroma_db")
 
     collection = chroma_client.get_or_create_collection(
-    name = "Mortgages_Collection",
-    embedding_function = embedding_function
+        name = "Mortgages_Collection"
     )   
 
 
@@ -129,7 +126,7 @@ if __name__ == "__main__":
         for i, chunk in enumerate(chunks):
             collection.upsert(
                 documents = [chunk],
-                embeddings = [embedding_function([chunk])[0]],
+                embeddings = embedding_function.embed_documents([chunk]),
                 metadatas = [{
                     "pdf_name": docs["pdf_name"],
                     "page_number": docs["page_number"]
@@ -137,7 +134,7 @@ if __name__ == "__main__":
                 ids = [f"{docs['pdf_name'].replace('.pdf','')}_page_{docs['page_number']}_chunk_{i}"]
             )
     
-    question  = "Tell me about champions league"
+    question  = "What does Hazardous Materials mean in Mortgages?"
     extracted_docs = query_docs(collection, question)
     answer = generate_response(question, extracted_docs)
 
