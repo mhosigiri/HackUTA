@@ -23,3 +23,45 @@
  HTTP  10/5/2025 9:26:23 AM ::1 GET /static/css/main.6dd64e77.css.map
  HTTP  10/5/2025 9:26:23 AM ::1 Returned 200 in 1 ms
  HTTP  10/5/2025 9:26:23 AM ::1 Returned 200 in 5 ms
+ HTTP  10/5/2025 9:35:38 AM ::1 GET /
+ HTTP  10/5/2025 9:35:38 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:35:38 AM ::1 GET /static/css/main.6dd64e77.css
+ HTTP  10/5/2025 9:35:38 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:35:38 AM ::1 GET /static/js/main.fa111fbb.js
+ HTTP  10/5/2025 9:35:38 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:35:39 AM ::1 GET /manifest.json
+ HTTP  10/5/2025 9:35:39 AM ::1 Returned 304 in 0 ms
+ HTTP  10/5/2025 9:35:39 AM ::1 GET /favicon.ico
+ HTTP  10/5/2025 9:35:39 AM ::1 Returned 304 in 0 ms
+ HTTP  10/5/2025 9:35:39 AM ::1 GET /logo192.png
+ HTTP  10/5/2025 9:35:39 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:36:13 AM ::1 GET /static/css/main.6dd64e77.css
+ HTTP  10/5/2025 9:36:13 AM ::1 GET /manifest.json
+ HTTP  10/5/2025 9:36:13 AM ::1 Returned 304 in 0 ms
+ HTTP  10/5/2025 9:36:13 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:36:13 AM ::1 GET /.well-known/appspecific/com.chrome.devtools.json
+ HTTP  10/5/2025 9:36:13 AM ::1 Returned 304 in 0 ms
+ HTTP  10/5/2025 9:36:13 AM ::1 GET /static/js/main.fa111fbb.js.map
+ HTTP  10/5/2025 9:36:13 AM ::1 Returned 304 in 2 ms
+ HTTP  10/5/2025 9:36:13 AM ::1 GET /static/css/main.6dd64e77.css.map
+ HTTP  10/5/2025 9:36:13 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:45:48 AM ::1 GET /
+ HTTP  10/5/2025 9:45:48 AM ::1 Returned 200 in 1 ms
+ HTTP  10/5/2025 9:46:57 AM ::1 GET /
+ HTTP  10/5/2025 9:46:57 AM ::1 Returned 200 in 1 ms
+ HTTP  10/5/2025 9:48:03 AM ::1 GET /
+ HTTP  10/5/2025 9:48:03 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:48:03 AM ::1 GET /static/css/main.6dd64e77.css
+ HTTP  10/5/2025 9:48:03 AM ::1 Returned 304 in 0 ms
+ HTTP  10/5/2025 9:48:03 AM ::1 GET /static/js/main.fa111fbb.js
+ HTTP  10/5/2025 9:48:03 AM ::1 Returned 304 in 0 ms
+ HTTP  10/5/2025 9:48:03 AM ::1 GET /favicon.ico
+ HTTP  10/5/2025 9:48:03 AM ::1 GET /manifest.json
+ HTTP  10/5/2025 9:48:03 AM ::1 Returned 304 in 2 ms
+ HTTP  10/5/2025 9:48:03 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:48:03 AM ::1 GET /logo192.png
+ HTTP  10/5/2025 9:48:03 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:48:19 AM ::1 GET /favicon.ico
+ HTTP  10/5/2025 9:48:19 AM ::1 Returned 304 in 0 ms
+ HTTP  10/5/2025 9:56:04 AM ::1 GET /
+ HTTP  10/5/2025 9:56:04 AM ::1 Returned 200 in 1 ms

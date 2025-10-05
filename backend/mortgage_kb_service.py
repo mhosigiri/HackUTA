@@ -406,7 +406,7 @@ class MortgageKnowledgeBase:
     
     def text_to_speech(self, text: str, voice_id: str = "JBFqnCBsd6RMkjVDRZzb") -> Optional[bytes]:
         """
-        Convert text to speech using ElevenLabs API
+        Convert text to speech using ElevenLabs API with file caching
         
         Args:
             text: Text to convert to speech
@@ -415,11 +415,32 @@ class MortgageKnowledgeBase:
         Returns:
             Audio bytes (MP3 format) or None if failed
         """
-        if not (ELEVENLABS_API_KEY and ELEVENLABS_AVAILABLE):
-            print("[Mortgage KB] TTS not available")
+        if not ELEVENLABS_AVAILABLE:
+            print("[Mortgage KB] TTS not available - elevenlabs package not installed")
+            return None
+            
+        if not ELEVENLABS_API_KEY:
+            print("[Mortgage KB] TTS not available - ELEVENLABS_API_KEY not set in .env")
             return None
         
         try:
+            # Create audio cache directory
+            cache_dir = os.path.join(os.path.dirname(__file__), "audio_cache")
+            os.makedirs(cache_dir, exist_ok=True)
+            
+            # Create cache key from text hash
+            import hashlib
+            text_hash = hashlib.md5(text.encode()).hexdigest()[:16]
+            cache_file = os.path.join(cache_dir, f"{text_hash}_{voice_id}.mp3")
+            
+            # Check if cached audio exists
+            if os.path.exists(cache_file):
+                print(f"[Mortgage KB] Using cached TTS audio: {cache_file}")
+                with open(cache_file, "rb") as f:
+                    return f.read()
+            
+            # Generate new audio
+            print(f"[Mortgage KB] Generating new TTS audio for {len(text)} characters...")
             client = ElevenLabs(api_key=ELEVENLABS_API_KEY)
             audio_generator = client.text_to_speech.convert(
                 text=text,
@@ -428,10 +449,17 @@ class MortgageKnowledgeBase:
                 output_format="mp3_44100_128",
             )
             audio_bytes = b"".join(list(audio_generator))
-            print(f"[Mortgage KB] Generated TTS audio: {len(audio_bytes)} bytes")
+            
+            # Cache the audio file
+            with open(cache_file, "wb") as f:
+                f.write(audio_bytes)
+            
+            print(f"[Mortgage KB] Generated and cached TTS audio: {len(audio_bytes)} bytes")
             return audio_bytes
         except Exception as e:
             print(f"[Mortgage KB] TTS error: {e}")
+            import traceback
+            traceback.print_exc()
             return None
 
 

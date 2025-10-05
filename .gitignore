@@ -1,1 +1,47 @@
-node_modules
+# Dependencies
+node_modules/
+backend/.venv/
+**/node_modules/
+
+# Environment files
+backend/.env
+.env
+
+# Upload directories
+backend/uploads/
+uploads/
+
+# Database & Vector Storage
+backend/chroma_storage/
+backend/chroma_persistent_storage/
+backend/RAG/chroma_persistent_storage/
+
+# Audio cache
+backend/audio_cache/
+
+# RAG folder (keep documents but ignore storage)
+backend/RAG/chroma_persistent_storage/
+
+# Log files
+*.log
+**/*.log
+
+# Shell scripts
+*.sh
+**/*.sh
+
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+*.egg-info/
+
+# Build outputs
+frontend/build/
+frontend/.env.local
+
+# OS files
+.DS_Store
+*.swp
+*.swo
