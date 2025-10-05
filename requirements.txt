@@ -7,3 +7,8 @@ PyPDF2
 pdfplumber
 pytesseract
 pillow
+google-search-results
+sentence-transformers
+fastapi
+uvicorn
+elevenlabs

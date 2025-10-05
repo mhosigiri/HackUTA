@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DocumentUpload from '../components/DocumentUpload';
 import ExtractedDataView from '../components/ExtractedDataView';
-import ChatBot from '../components/ChatBot';
+import MortgageKnowledgeBase from '../components/MortgageKnowledgeBase';
 import { API_CONFIG, DOCUMENT_STATUS } from '../config/constants';
 
 interface Document {
@@ -121,9 +121,9 @@ const Dashboard: React.FC = () => {
           <DocumentUpload onUploadComplete={handleUploadComplete} />
         </div>
 
-        {/* AI Chat Assistant Section */}
+        {/* Unified Document & Policy Assistant */}
         <div className="mb-12">
-          <ChatBot />
+          <MortgageKnowledgeBase />
         </div>
 
         {/* Uploaded Documents Section */}

@@ -1,68 +1,92 @@
 INFO:     Will watch for changes in these directories: ['/Users/arniskc/Documents/HackUTA/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [70628] using WatchFiles
+INFO:     Started reloader process [83916] using WatchFiles
 /Users/arniskc/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-INFO:     Started server process [70642]
+INFO:     Started server process [83930]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 [Document AI] Warning: Credentials file not found. Will use fallback extraction.
 [RAG] Gemini API configured
+[RAG] SerpAPI configured for web search
+[Mortgage KB] Gemini API configured
+[Mortgage KB] Warning: ELEVENLABS_API_KEY not set - TTS disabled
+[Mortgage KB] SerpAPI configured for fallback web search
 [RAG] Loaded embedding model: all-MiniLM-L6-v2
-[RAG] ChromaDB initialized with 4 documents
+[RAG] ChromaDB initialized with 6372 documents
 [Router] RAG service initialized
 [startup] Upload directory ready: /Users/arniskc/Documents/HackUTA/backend/uploads
-INFO:     127.0.0.1:63553 - "GET /health HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63581 - "GET / HTTP/1.1" 200 OK
-INFO:     127.0.0.1:63636 - "GET /api/documents HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+[Mortgage KB] Loading embedding model...
+[Mortgage KB] Policy docs: 14383 chunks
+[Mortgage KB] User docs: 0 chunks
+[Mortgage KB] Policy collection already has 14383 chunks. Skipping reload.
+INFO:     127.0.0.1:63075 - "GET /api/mortgage-kb/stats HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'app.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [70642]
+INFO:     Finished server process [83930]
 /Users/arniskc/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-INFO:     Started server process [70918]
+INFO:     Started server process [84073]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
 [Document AI] Warning: Credentials file not found. Will use fallback extraction.
 [RAG] Gemini API configured
+[RAG] SerpAPI configured for web search
+[Mortgage KB] Gemini API configured
+[Mortgage KB] Warning: ELEVENLABS_API_KEY not set - TTS disabled
+[Mortgage KB] SerpAPI configured for fallback web search
 [RAG] Loaded embedding model: all-MiniLM-L6-v2
-[RAG] ChromaDB initialized with 4 documents
+[RAG] ChromaDB initialized with 6372 documents
 [Router] RAG service initialized
 [startup] Upload directory ready: /Users/arniskc/Documents/HackUTA/backend/uploads
-INFO:     127.0.0.1:63669 - "OPTIONS /api/rag/query HTTP/1.1" 200 OK
-[RAG] Retrieved 3 relevant chunks
-INFO:     127.0.0.1:63669 - "POST /api/rag/query HTTP/1.1" 200 OK
-[RAG] Retrieved 3 relevant chunks
-INFO:     127.0.0.1:64073 - "POST /api/rag/query HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64123 - "POST /api/documents/upload HTTP/1.1" 200 OK
-huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
-To disable this warning, you can either:
-	- Avoid using `tokenizers` before the fork if possible
-	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)
-Error processing document with Document AI: File /Users/arniskc/Desktop/HackUTA/docuextractmhosigiri-4cc95bebf955.json was not found., falling back to simple extraction
-[Router] Enhancing extraction with RAG for document 300a49d3709648499d40d8c7cfb5bb94
-[RAG] Added document 300a49d3709648499d40d8c7cfb5bb94 with 2 chunks
-[RAG] Added document temp_8197 with 2 chunks
-[RAG] Retrieved 1 relevant chunks
-[RAG] Retrieved 1 relevant chunks
-[RAG] Retrieved 1 relevant chunks
-[RAG] Retrieved 1 relevant chunks
-[RAG] Retrieved 1 relevant chunks
-[RAG] Retrieved 1 relevant chunks
-INFO:     127.0.0.1:64123 - "POST /api/documents/300a49d3709648499d40d8c7cfb5bb94/process?use_rag=true HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64123 - "GET /api/documents/300a49d3709648499d40d8c7cfb5bb94 HTTP/1.1" 200 OK
-INFO:     127.0.0.1:64123 - "GET /api/documents HTTP/1.1" 200 OK
-[RAG] Retrieved 3 relevant chunks
-INFO:     127.0.0.1:64191 - "POST /api/rag/query HTTP/1.1" 200 OK
-WARNING:  WatchFiles detected changes in 'main.py'. Reloading...
+[Mortgage KB] Loading embedding model...
+[Mortgage KB] Policy docs: 14383 chunks
+[Mortgage KB] User docs: 0 chunks
+[Mortgage KB] Policy collection already has 14383 chunks. Skipping reload.
+INFO:     127.0.0.1:63199 - "POST /api/mortgage-kb/query HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63215 - "GET /api/mortgage-kb/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "GET /api/documents HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63259 - "POST /api/mortgage-kb/query HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63376 - "GET /health HTTP/1.1" 200 OK
+WARNING:  WatchFiles detected changes in 'mortgage_kb_service.py', 'routers.py'. Reloading...
 INFO:     Shutting down
 INFO:     Waiting for application shutdown.
 INFO:     Application shutdown complete.
-INFO:     Finished server process [70918]
+INFO:     Finished server process [84073]
 /Users/arniskc/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
   warnings.warn(
-INFO:     Started server process [72520]
+INFO:     Started server process [84200]
 INFO:     Waiting for application startup.
 INFO:     Application startup complete.
+WARNING:  WatchFiles detected changes in 'mortgage_kb_service.py', 'routers.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [84200]
+/Users/arniskc/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+INFO:     Started server process [84214]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+[Document AI] Warning: Credentials file not found. Will use fallback extraction.
+[RAG] Gemini API configured
+[RAG] SerpAPI configured for web search
+[Mortgage KB] Gemini API configured
+[Mortgage KB] Warning: ELEVENLABS_API_KEY not set - TTS disabled
+[Mortgage KB] SerpAPI configured for fallback web search
+[RAG] Loaded embedding model: all-MiniLM-L6-v2
+[RAG] ChromaDB initialized with 6372 documents
+[Router] RAG service initialized
+[startup] Upload directory ready: /Users/arniskc/Documents/HackUTA/backend/uploads
+INFO:     127.0.0.1:64139 - "OPTIONS /api/mortgage-kb/query HTTP/1.1" 200 OK
+[Mortgage KB] Loading embedding model...
+[Mortgage KB] Policy docs: 14383 chunks
+[Mortgage KB] User docs: 0 chunks
+[Mortgage KB] Policy collection already has 14383 chunks. Skipping reload.
+INFO:     127.0.0.1:64139 - "POST /api/mortgage-kb/query HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64505 - "POST /api/mortgage-kb/query HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64505 - "OPTIONS /api/mortgage-kb/tts HTTP/1.1" 200 OK
+[Mortgage KB] TTS not available
+INFO:     127.0.0.1:64505 - "POST /api/mortgage-kb/tts HTTP/1.1" 503 Service Unavailable

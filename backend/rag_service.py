@@ -11,6 +11,12 @@ import chromadb
 import google.generativeai as genai
 from dotenv import load_dotenv
 
+# Web search (SerpAPI)
+try:
+    from serpapi import GoogleSearch  # type: ignore
+except ImportError:
+    GoogleSearch = None  # Handled at runtime
+
 load_dotenv()
 
 # Configure Gemini
@@ -20,6 +26,15 @@ if GEMINI_API_KEY:
     print("[RAG] Gemini API configured")
 else:
     print("[RAG] Warning: GEMINI_API_KEY not found")
+
+# SerpAPI key for live web search
+SERPAPI_API_KEY = os.getenv("SERPAPI_API_KEY")
+if SERPAPI_API_KEY and GoogleSearch:
+    print("[RAG] SerpAPI configured for web search")
+elif not GoogleSearch:
+    print("[RAG] Warning: serpapi package not installed — live web search disabled")
+else:
+    print("[RAG] Warning: SERPAPI_API_KEY not set — live web search disabled")
 
 
 class EmbeddingFunction:
@@ -194,24 +209,32 @@ class RAGDocumentService:
         # Retrieve relevant documents
         context_docs = self.query_documents(question, n_results)
         
-        if not context_docs:
-            # No documents available - use Gemini to answer general questions
-            print("[RAG] No documents found, using Gemini for general question answering")
+        # Detect if question is general (mortgage knowledge) vs document-specific
+        general_keywords = ["current", "average", "typical", "what is", "how much", "explain", 
+                           "define", "difference between", "requirements for", "process of",
+                           "rate", "rates", "guidelines", "rules", "regulations", "qualify"]
+        is_general_question = any(keyword in question.lower() for keyword in general_keywords)
+        
+        # If question seems general OR no documents found, use web-enhanced response
+        if is_general_question or not context_docs:
+            print(f"[RAG] {'General question detected' if is_general_question else 'No documents found'}, using web-enhanced response")
             general_answer = self._generate_general_response(question)
             return {
                 "answer": general_answer,
                 "sources": [],
-                "context_used": False
+                "context_used": False,
+                "web_search_used": True
             }
         
-        # Generate response with document context
+        # Generate response with document context (for document-specific questions)
         answer = self.generate_response(question, context_docs)
         
         return {
             "answer": answer,
             "sources": context_docs,
             "context_used": True,
-            "num_sources": len(context_docs)
+            "num_sources": len(context_docs),
+            "web_search_used": False
         }
     
     def _generate_general_response(self, question: str) -> str:
@@ -225,25 +248,33 @@ class RAGDocumentService:
             Generated response
         """
         if not GEMINI_API_KEY:
-            return "I need a Gemini API key to answer questions. Please make sure GEMINI_API_KEY is configured."
-        
+            return "Gemini API key is not configured."
+
+        # Gather web context
+        web_snippets = self._web_search(question, k=5)
+        web_context = "\n\n".join(web_snippets)
+        if not web_context:
+            web_context = "(No live web results found.)"
+
         try:
             prompt = (
-                "You are a helpful mortgage and document assistant. "
-                "The user is asking a question but hasn't uploaded any documents yet. "
-                "Provide helpful, accurate information about mortgages, document requirements, "
-                "home buying process, or related topics. Keep your answer clear and concise.\n\n"
-                f"Question: {question}"
+                "You are a senior mortgage underwriting AI assistant. "
+                "Answer the user's question with authoritative, up-to-date mortgage information. "
+                "Incorporate statistics (rates, averages, limits) if available in the CONTEXT or your training. "
+                "Cite external facts briefly (e.g., 'According to HUD 2024 report, …'). "
+                "Keep the answer concise and actionable.\n\n"
+                f"CONTEXT:\n{web_context}\n\nQUESTION:\n{question}"
             )
-            
+
             model = genai.GenerativeModel("models/gemini-2.0-flash-exp")
             response = model.generate_content(prompt)
-            
             return response.text
-            
         except Exception as e:
             print(f"[RAG] Error generating general response: {e}")
-            return f"I'm here to help with mortgage questions and document analysis. However, I encountered an error: {str(e)}"
+            return (
+                "I'm here to help with mortgage questions, but I encountered an error fetching or generating the answer. "
+                f"Error: {str(e)}"
+            )
     
     def extract_key_value_pairs_with_rag(self, document_text: str) -> Dict:
         """
@@ -302,6 +333,26 @@ class RAGDocumentService:
             chunks.append(text[start:end])
             start = end - chunk_overlap
         return chunks
+
+    # -------------------- Web Search --------------------
+    def _web_search(self, query: str, k: int = 5) -> List[str]:
+        """Return top-k snippet strings from SerpAPI Google search"""
+        if not (SERPAPI_API_KEY and GoogleSearch):
+            return []
+        try:
+            params = {
+                "engine": "google",
+                "q": query,
+                "api_key": SERPAPI_API_KEY,
+                "num": k,
+                "hl": "en",
+            }
+            results = GoogleSearch(params).get_dict()
+            snippets = [item.get("snippet", "") for item in results.get("organic_results", [])[:k]]
+            return [s for s in snippets if s]
+        except Exception as e:
+            print(f"[RAG] Web search error: {e}")
+            return []
     
     def load_pdf(self, pdf_path: str) -> List[Dict]:
         """

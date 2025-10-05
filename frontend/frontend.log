@@ -1,1 +1,25 @@
- INFO  Accepting connections at http://localhost:62945
+ INFO  Accepting connections at http://localhost:3000
+ HTTP  10/5/2025 9:25:05 AM ::1 GET /
+ HTTP  10/5/2025 9:25:05 AM ::1 Returned 200 in 11 ms
+ HTTP  10/5/2025 9:25:05 AM ::1 GET /static/js/main.fa111fbb.js
+ HTTP  10/5/2025 9:25:05 AM ::1 GET /static/css/main.6dd64e77.css
+ HTTP  10/5/2025 9:25:05 AM ::1 Returned 200 in 2 ms
+ HTTP  10/5/2025 9:25:05 AM ::1 Returned 200 in 3 ms
+ HTTP  10/5/2025 9:25:06 AM ::1 GET /favicon.ico
+ HTTP  10/5/2025 9:25:06 AM ::1 GET /manifest.json
+ HTTP  10/5/2025 9:25:06 AM ::1 Returned 200 in 1 ms
+ HTTP  10/5/2025 9:25:06 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:25:06 AM ::1 GET /logo192.png
+ HTTP  10/5/2025 9:25:06 AM ::1 Returned 200 in 0 ms
+ HTTP  10/5/2025 9:25:33 AM ::1 GET /
+ HTTP  10/5/2025 9:25:33 AM ::1 Returned 200 in 1 ms
+ HTTP  10/5/2025 9:26:23 AM ::1 GET /manifest.json
+ HTTP  10/5/2025 9:26:23 AM ::1 GET /static/css/main.6dd64e77.css
+ HTTP  10/5/2025 9:26:23 AM ::1 Returned 304 in 1 ms
+ HTTP  10/5/2025 9:26:23 AM ::1 GET /.well-known/appspecific/com.chrome.devtools.json
+ HTTP  10/5/2025 9:26:23 AM ::1 Returned 304 in 2 ms
+ HTTP  10/5/2025 9:26:23 AM ::1 Returned 200 in 2 ms
+ HTTP  10/5/2025 9:26:23 AM ::1 GET /static/js/main.fa111fbb.js.map
+ HTTP  10/5/2025 9:26:23 AM ::1 GET /static/css/main.6dd64e77.css.map
+ HTTP  10/5/2025 9:26:23 AM ::1 Returned 200 in 1 ms
+ HTTP  10/5/2025 9:26:23 AM ::1 Returned 200 in 5 ms

@@ -12,6 +12,9 @@ export const API_CONFIG = {
     RAG_QUERY: '/api/rag/query',
     RAG_STATS: '/api/rag/stats',
     DETAIL: (documentId: string) => `/api/documents/${documentId}`,
+    MORTGAGE_KB_QUERY: '/api/mortgage-kb/query',
+    MORTGAGE_KB_STATS: '/api/mortgage-kb/stats',
+    MORTGAGE_KB_TTS: '/api/mortgage-kb/tts',
   },
 } as const;
 

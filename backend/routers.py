@@ -1,4 +1,5 @@
 from fastapi import APIRouter, HTTPException, UploadFile, File
+from fastapi.responses import StreamingResponse
 from typing import List
 import os
 import shutil
@@ -6,9 +7,29 @@ import uuid
 from datetime import datetime
 from document_ai_service import process_document
 from rag_service import get_rag_service
+from mortgage_kb_service import get_mortgage_kb
 import json
+import PyPDF2
+from io import BytesIO
 
 api_router = APIRouter()
+
+def get_page_count(file_path: str) -> int:
+    """
+    Get page count for a document
+    Returns 1 for images/text files, actual page count for PDFs
+    """
+    try:
+        if file_path.lower().endswith('.pdf'):
+            with open(file_path, 'rb') as f:
+                reader = PyPDF2.PdfReader(f)
+                return len(reader.pages)
+        else:
+            # Images and text files are considered single-page
+            return 1
+    except Exception as e:
+        print(f"[Router] Error getting page count: {e}")
+        return 1
 
 # Simple in-memory storage for documents (for demo purposes)
 documents_store = {}
@@ -98,13 +119,14 @@ async def upload_documents(files: List[UploadFile] = File(...)):
 
 
 @api_router.post("/documents/{document_id}/process")
-async def process_document_endpoint(document_id: str, use_rag: bool = True):
+async def process_document_endpoint(document_id: str):
     """
-    Process a document using Document AI and optionally enhance with RAG.
+    Process a document:
+    - Single-page docs: Extract key-value pairs only
+    - Multi-page docs: Extract key-value pairs + add to RAG for querying
     
     Args:
         document_id: Document ID to process
-        use_rag: Whether to use RAG for enhanced extraction (default: True)
     """
     # Get the document
     doc = documents_store.get(document_id)
@@ -115,6 +137,12 @@ async def process_document_endpoint(document_id: str, use_rag: bool = True):
     try:
         # Update status to processing
         doc["status"] = "processing"
+
+        # Get page count
+        page_count = get_page_count(doc["file_path"])
+        doc["page_count"] = page_count
+        
+        print(f"[Router] Processing document {doc['file_name']} with {page_count} page(s)")
 
         # Read the file content
         with open(doc["file_path"], "rb") as f:
@@ -129,29 +157,29 @@ async def process_document_endpoint(document_id: str, use_rag: bool = True):
         else:
             mime_type = "application/octet-stream"
 
-        # Process with Document AI (or fallback)
+        # Extract key-value pairs with Document AI or fallback
         extracted_data = process_document(file_content, mime_type)
+        extracted_data["page_count"] = page_count
 
-        # Enhance with RAG if enabled and available
-        if use_rag and rag_service and extracted_data.get("text"):
-            print(f"[Router] Enhancing extraction with RAG for document {document_id}")
-            
-            # Add document to RAG system
-            rag_service.add_document(
+        # If multi-page document, add to RAG knowledge base for querying
+        if page_count > 1 and extracted_data.get("text"):
+            print(f"[Router] Multi-page document detected - adding to RAG knowledge base")
+            kb = get_mortgage_kb()
+            success = kb.add_user_document(
                 document_id=document_id,
                 text=extracted_data["text"],
+                filename=doc["file_name"],
                 metadata={
-                    "file_name": doc["file_name"],
-                    "upload_date": doc["upload_date"]
+                    "upload_date": doc["upload_date"],
+                    "page_count": page_count
                 }
             )
-            
-            # Use RAG to extract additional key-value pairs
-            rag_extraction = rag_service.extract_key_value_pairs_with_rag(extracted_data["text"])
-            
-            # Merge RAG results with Document AI results
-            extracted_data["rag_enhanced"] = True
-            extracted_data["rag_extraction"] = rag_extraction
+            extracted_data["added_to_rag"] = success
+            extracted_data["queryable"] = success
+        else:
+            print(f"[Router] Single-page document - key-value extraction only")
+            extracted_data["added_to_rag"] = False
+            extracted_data["queryable"] = False
         
         # Update document with extracted data
         doc["extracted_data"] = extracted_data
@@ -161,13 +189,17 @@ async def process_document_endpoint(document_id: str, use_rag: bool = True):
         return {
             "message": "Document processed successfully",
             "document_id": document_id,
+            "page_count": page_count,
             "extracted_data": extracted_data,
-            "rag_enhanced": use_rag and rag_service is not None
+            "processing_type": "rag_enabled" if page_count > 1 else "key_value_only"
         }
 
     except Exception as e:
         # Update status to failed
         doc["status"] = "failed"
+        print(f"[Router] Error processing document: {e}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Failed to process document: {str(e)}")
 
 
@@ -278,3 +310,85 @@ async def rag_stats():
         }
     except Exception as e:
         return {"available": False, "error": str(e)}
+
+
+@api_router.post("/mortgage-kb/query")
+async def mortgage_kb_query(request: dict):
+    """
+    Query the mortgage knowledge base (trained on policy PDFs)
+    
+    Request body:
+        {
+            "query": "Your question about mortgage policies",
+            "n_results": 3  (optional)
+        }
+        
+    Returns:
+        Answer with source citations from mortgage policy documents
+    """
+    query = request.get("query")
+    if not query:
+        raise HTTPException(status_code=400, detail="Query is required")
+    
+    n_results = request.get("n_results", 3)
+    
+    try:
+        kb = get_mortgage_kb()
+        result = kb.query(query, n_results)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Mortgage KB query failed: {str(e)}")
+
+
+@api_router.get("/mortgage-kb/stats")
+async def mortgage_kb_stats():
+    """Get mortgage knowledge base statistics"""
+    try:
+        kb = get_mortgage_kb()
+        stats = kb.get_stats()
+        return {
+            "available": True,
+            "stats": stats
+        }
+    except Exception as e:
+        return {"available": False, "error": str(e)}
+
+
+@api_router.post("/mortgage-kb/tts")
+async def mortgage_kb_tts(request: dict):
+    """
+    Convert text to speech using ElevenLabs
+    
+    Request body:
+        {
+            "text": "Text to convert to speech",
+            "voice_id": "JBFqnCBsd6RMkjVDRZzb"  (optional)
+        }
+        
+    Returns:
+        MP3 audio stream
+    """
+    text = request.get("text")
+    if not text:
+        raise HTTPException(status_code=400, detail="Text is required")
+    
+    voice_id = request.get("voice_id", "JBFqnCBsd6RMkjVDRZzb")
+    
+    try:
+        kb = get_mortgage_kb()
+        audio_bytes = kb.text_to_speech(text, voice_id)
+        
+        if not audio_bytes:
+            raise HTTPException(status_code=503, detail="TTS service not available or failed")
+        
+        return StreamingResponse(
+            BytesIO(audio_bytes),
+            media_type="audio/mpeg",
+            headers={
+                "Content-Disposition": "attachment; filename=response.mp3"
+            }
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"TTS generation failed: {str(e)}")

@@ -70,7 +70,7 @@ const DocumentUpload: React.FC<DocumentUploadProps> = ({ onUploadComplete }) => 
         for (const doc of result.documents) {
           try {
             setUploadProgress(STATUS_MESSAGES.UPLOAD.PROCESSING(doc.file_name));
-            const processUrl = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PROCESS(doc.id)}?use_rag=${UPLOAD_CONFIG.USE_RAG_PROCESSING}`;
+            const processUrl = `${API_CONFIG.BASE_URL}${API_CONFIG.ENDPOINTS.PROCESS(doc.id)}`;
             await fetch(processUrl, { method: 'POST' });
             setUploadProgress(STATUS_MESSAGES.UPLOAD.WAITING(doc.file_name));
             await waitForProcessing(doc.id);
