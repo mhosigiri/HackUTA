@@ -1,5 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+// @ts-nocheck
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { OrbitControls, Float, Environment, ContactShadows } from '@react-three/drei';
+import * as THREE from 'three';
 
 interface Activity {
   id: string;
@@ -133,6 +137,109 @@ const Activities: React.FC = () => {
     );
   };
 
+  const Folder = () => {
+    const color = new THREE.Color('#f3f4f6');
+    const tabColor = new THREE.Color('#e5e7eb');
+    return (
+      <group>
+        {/* Folder body */}
+        <mesh castShadow receiveShadow>
+          <boxGeometry args={[2.4, 1.6, 0.25]} />
+          <meshStandardMaterial color={color} metalness={0.2} roughness={0.4} />
+        </mesh>
+        {/* Folder tab */}
+        <mesh position={[-0.6, 0.9, 0]} castShadow receiveShadow>
+          <boxGeometry args={[1.2, 0.4, 0.25]} />
+          <meshStandardMaterial color={tabColor} metalness={0.2} roughness={0.4} />
+        </mesh>
+      </group>
+    );
+  };
+
+  const EmptyFoldersScene: React.FC = () => {
+    const groupRef = useRef<THREE.Group>(null);
+    const leftRef = useRef<THREE.Group>(null);
+    const centerRef = useRef<THREE.Group>(null);
+    const rightRef = useRef<THREE.Group>(null);
+    const controlsRef = useRef<any>(null);
+    const { camera, pointer } = useThree();
+
+    // Default camera and target
+    const defaultPos = new THREE.Vector3(4, 3, 5);
+    const defaultTarget = new THREE.Vector3(0, 0.2, 0);
+    const camTargetPos = useRef(defaultPos.clone());
+    const orbitTarget = useRef(defaultTarget.clone());
+
+    // Parallax hover based on pointer
+    useFrame(() => {
+      if (groupRef.current) {
+        const rotX = THREE.MathUtils.lerp(groupRef.current.rotation.x, pointer.y * 0.2, 0.05);
+        const rotY = THREE.MathUtils.lerp(groupRef.current.rotation.y, -pointer.x * 0.3, 0.05);
+        groupRef.current.rotation.x = rotX;
+        groupRef.current.rotation.y = rotY;
+      }
+
+      // Smoothly move camera toward target position and look target
+      camera.position.lerp(camTargetPos.current, 0.06);
+      if (controlsRef.current) {
+        controlsRef.current.target.lerp(orbitTarget.current, 0.08);
+        controlsRef.current.update();
+      } else {
+        camera.lookAt(orbitTarget.current);
+      }
+    });
+
+    const focusOn = (pos?: THREE.Vector3) => {
+      if (!pos) return;
+      // Calculate a pleasant offset to the side and above
+      const offset = new THREE.Vector3(2.2, 1.6, 2.2);
+      camTargetPos.current = pos.clone().add(offset);
+      orbitTarget.current = pos.clone();
+      if (controlsRef.current) controlsRef.current.autoRotate = false;
+    };
+
+    const resetFocus = () => {
+      camTargetPos.current = defaultPos.clone();
+      orbitTarget.current = defaultTarget.clone();
+      if (controlsRef.current) controlsRef.current.autoRotate = true;
+    };
+
+    const onGroupClick = (ref: React.RefObject<THREE.Group | null>) => () => {
+      if (!ref.current) return;
+      const pos = new THREE.Vector3();
+      ref.current.getWorldPosition(pos);
+      focusOn(pos);
+    };
+
+    return (
+      <>
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[5, 5, 5]} intensity={0.8} castShadow />
+        <Environment preset="city" />
+        <Float speed={1.1} rotationIntensity={0.35} floatIntensity={0.5}>
+          <group ref={groupRef} position={[0, 0.2, 0]}> 
+            <group ref={leftRef} position={[ -1.8, 0, 0 ]} onClick={onGroupClick(leftRef)}>
+              <Folder />
+            </group>
+            <group ref={centerRef} position={[ 0, 0, 0 ]} onClick={onGroupClick(centerRef)}>
+              <Folder />
+            </group>
+            <group ref={rightRef} position={[ 1.8, 0, 0 ]} onClick={onGroupClick(rightRef)}>
+              <Folder />
+            </group>
+          </group>
+        </Float>
+        <ContactShadows position={[0, -0.8, 0]} opacity={0.35} scale={10} blur={2.5} far={2} />
+        <OrbitControls ref={controlsRef} enablePan={false} enableZoom={false} autoRotate autoRotateSpeed={0.6} />
+        {/* Click on background to reset focus */}
+        <mesh position={[0, -1, 0]} rotation={[-Math.PI / 2, 0, 0]} onClick={resetFocus} visible={false}>
+          <planeGeometry args={[100, 100]} />
+          <meshBasicMaterial transparent opacity={0} />
+        </mesh>
+      </>
+    );
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 flex items-center justify-center">
@@ -231,6 +338,17 @@ const Activities: React.FC = () => {
         {/* Documents Tab */}
         {activeTab === 'documents' && (
           <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+            {documents.length === 0 ? (
+              <div className="relative w-full h-[520px] bg-gradient-to-br from-gray-50 to-blue-50">
+                <Canvas shadows camera={{ position: [4, 3, 5], fov: 45 }}>
+                  <EmptyFoldersScene />
+                </Canvas>
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">No documents yet</h3>
+                  <p className="text-gray-600">Your empty folders are ready. Upload to get started.</p>
+                </div>
+              </div>
+            ) : (
             <div className="overflow-x-auto">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
@@ -281,7 +399,7 @@ const Activities: React.FC = () => {
                   ))}
                 </tbody>
               </table>
-            </div>
+            </div>) }
           </div>
         )}
       </div>

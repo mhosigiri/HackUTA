@@ -20,7 +20,7 @@ const Header: React.FC = () => {
               </svg>
             </div>
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              MortgageDoc AI
+              DocuExtract
             </span>
           </div>
 
