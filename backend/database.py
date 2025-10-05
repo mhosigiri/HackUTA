@@ -36,7 +36,7 @@ DB_PORT = os.getenv("DB_PORT", "5432")
 GCP_PROJECT_ID = os.getenv("GCP_PROJECT_ID", "")
 GCP_REGION = os.getenv("GCP_REGION", "us-central1")
 GCP_INSTANCE_NAME = os.getenv("GCP_INSTANCE_NAME", "")
-USE_CLOUD_SQL = os.getenv("USE_CLOUD_SQL", "false").lower() == "true"
+USE_CLOUD_SQL = os.getenv("USE_CLOUD_SQL", "true").lower() == "true"
 
 Base = declarative_base()
 
@@ -58,7 +58,7 @@ def get_connector_connection():
     def getconn():
         conn = connector.connect(
             f"{GCP_PROJECT_ID}:{GCP_REGION}:{GCP_INSTANCE_NAME}",
-            "pg8000",
+            "psycopg2",
             user=DB_USER,
             password=DB_PASSWORD,
             db=DB_NAME,
@@ -70,9 +70,9 @@ def get_connector_connection():
 
 # Create database engine
 if USE_CLOUD_SQL:
-    # Use Cloud SQL connector
+    # Use Cloud SQL connector (psycopg2 driver)
     engine = create_engine(
-        "postgresql+pg8000://",
+        "postgresql+psycopg2://",
         creator=get_connector_connection(),
     )
 else:
