@@ -1,0 +1,37 @@
+# Frontend-only branch: ignore backend and heavy artifacts
+
+# Ignore entire backend in this branch
+backend/
+
+# Secrets and keys
+docuextractmhosigiri_servicekey.json
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.crt
+
+# Frontend build and caches
+frontend/node_modules/
+frontend/build/
+frontend/.cache/
+
+# Generic JS/TS artifacts
+node_modules/
+build/
+dist/
+*.log
+
+# Python artifacts (in case any slip in)
+**/__pycache__/
+**/*.py[cod]
+.venv/
+venv/
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
